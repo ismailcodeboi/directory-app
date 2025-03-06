@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h2>Directory Listing: {{ directoryPath }}</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-light">
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Type</th>
+        <th>Created</th>
+        <th>Permissions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let file of files$ | async" (click)="file.isDirectory && onDirectorySelect(file.path)" [class.table-info]="file.isDirectory" style="cursor: pointer;">
+        <td>{{ file.name }}</td>
+        <td>{{ file.isDirectory ? '-' : file.size + ' bytes' }}</td>
+        <td>{{ file.isDirectory ? 'Directory' : file.extension }}</td>
+        <td>{{ file.created | date: 'medium' }}</td>
+        <td>{{ file.permissions }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
