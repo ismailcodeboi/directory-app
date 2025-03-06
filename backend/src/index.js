@@ -2,6 +2,7 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const { buildSchema } = require('graphql');
 const resolvers = require('./resolvers');
+const cors = require(`cors`);
 
 const schema = buildSchema(`
   type File {
@@ -21,6 +22,7 @@ const schema = buildSchema(`
 
 const app = express();
 
+app.use(cors());
 app.use(
     '/graphql',
     graphqlHTTP({
