@@ -1,3 +1,17 @@
 .table-info {
   background-color: #f0f8ff; /* Light blue background for directories */
 }
+
+.directory-path {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.path-part {
+  cursor: pointer;
+  color: #007bff;
+}
+
+.path-part:hover {
+  text-decoration: underline;
+}

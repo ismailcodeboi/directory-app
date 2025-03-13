@@ -1,5 +1,14 @@
 <div class="container mt-4">
-  <h2>Directory Listing: {{ directoryPath }}</h2>
+  <h2 class="directory-path">
+    <span>Current Directory: </span>
+    <span (click)="onPathClick(0)" class="path-part">/</span>
+    <span *ngFor="let segment of getPathSegments(); let i = index" (click)="onPathClick(i + 1)" class="path-part">
+      {{ segment }} /
+    </span>
+  </h2>
+  <button (click)="goBack()" [disabled]="history.length <= 1" class="btn btn-secondary mb-3">
+    Back
+  </button>
   <div class="table-responsive">
     <table class="table table-bordered table-hover">
       <thead class="thead-light">
