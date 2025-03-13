@@ -37,6 +37,7 @@ export class DirectoryListingComponent implements OnInit {
   onPathClick(index: number): void {
     this.directoryPath = this.history[index];
     this.history = this.history.slice(0, index + 1);
+    this.currentOffset = 0;
     this.loadDirectory();
   }
 
@@ -48,6 +49,7 @@ export class DirectoryListingComponent implements OnInit {
     if (this.history.length > 1) {
       this.history.pop();
       this.directoryPath = this.history[this.history.length - 1];
+      this.currentOffset = 0;
       this.loadDirectory();
     }
   }
