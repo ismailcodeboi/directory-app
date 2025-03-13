@@ -19,12 +19,12 @@ export interface File {
 export class DirectoryService {
   constructor(private apollo: Apollo) {}
 
-  listDirectory(path: string): Observable<File[]> {
+  listDirectory(path: string, limit?: number, offset?: number): Observable<File[]> {
     return this.apollo
       .query<{ listDirectory: File[] }>({
         query: gql`
-          query ListDirectory($path: String!) {
-            listDirectory(path: $path) {
+          query ListDirectory($path: String!, $limit: Int, $offset: Int) {
+            listDirectory(path: $path, limit: $limit, offset: $offset) {
               name
               path
               size
@@ -35,7 +35,7 @@ export class DirectoryService {
             }
           }
         `,
-        variables: { path },
+        variables: { path, limit, offset},
       })
       .pipe(map((result) => result.data.listDirectory));
   }
