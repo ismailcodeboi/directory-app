@@ -2,10 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 const resolvers = {
-    listDirectory: ({ path: dirPath }) => {
+    listDirectory: ({ path: dirPath, limit, offset }) => {
         try {
             const files = fs.readdirSync(dirPath);
-            return files.map((file) => {
+            const paginatedFiles = files.slice(offset || 0, (offset || 0) + (limit || files.length));
+            return paginatedFiles.map((file) => {
                 const fullPath = path.join(dirPath, file);
                 const stats = fs.statSync(fullPath);
                 return {

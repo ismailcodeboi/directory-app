@@ -16,7 +16,7 @@ const schema = buildSchema(`
   }
 
   type Query {
-    listDirectory(path: String!): [File]
+    listDirectory(path: String!, limit: Int, offset: Int): [File]
   }
 `);
 
