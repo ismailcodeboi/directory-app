@@ -16,6 +16,7 @@ export class DirectoryListingComponent implements OnInit {
   history: string[] = ['/'];
   currentOffset: number = 0;
   limit: number = 25;
+  fileLength: number = 0;
 
   constructor(private directoryService: DirectoryService) {}
 
@@ -25,6 +26,7 @@ export class DirectoryListingComponent implements OnInit {
 
   loadDirectory(): void {
     this.files$ = this.directoryService.listDirectory(this.directoryPath, this.limit, this.currentOffset)
+    this.files$.subscribe(result => { this.fileLength = result.length; console.log(result.length)})
   }
 
   onDirectorySelect(path: string): void {
