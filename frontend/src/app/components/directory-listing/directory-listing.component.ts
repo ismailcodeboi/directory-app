@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { DirectoryService, File } from '../../services/directory.service';
 import { Observable } from 'rxjs';
 import {CommonModule} from "@angular/common";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faFolder, faFile } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-directory-listing',
   templateUrl: './directory-listing.component.html',
   styleUrls: ['./directory-listing.component.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, FontAwesomeModule]
 })
 export class DirectoryListingComponent implements OnInit {
   directoryPath: string = '/'; // Default directory path
@@ -17,6 +19,9 @@ export class DirectoryListingComponent implements OnInit {
   currentOffset: number = 0;
   limit: number = 25;
   fileLength: number = 0;
+  faFile = faFile;
+  faFolder = faFolder;
+
 
   constructor(private directoryService: DirectoryService) {}
 
@@ -26,7 +31,7 @@ export class DirectoryListingComponent implements OnInit {
 
   loadDirectory(): void {
     this.files$ = this.directoryService.listDirectory(this.directoryPath, this.limit, this.currentOffset)
-    this.files$.subscribe(result => { this.fileLength = result.length; console.log(result.length)})
+    this.files$.subscribe(result => { this.fileLength = result.length;})
   }
 
   onDirectorySelect(path: string): void {

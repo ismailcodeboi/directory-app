@@ -10,9 +10,13 @@
     Back
   </button>
   <div class="file-explorer">
-    <div *ngFor="let file of files$ | async" (click)="file.isDirectory && onDirectorySelect(file.path)" class="file-item">
-<!--      <fa-icon [icon]="file.isDirectory ? faFolder : faFile" class="file-icon"></fa-icon>-->
-      <span class="file-name">{{ file.name }}</span>
+    <div *ngFor="let file of files$ | async" (click)="file.isDirectory && onDirectorySelect(file.path)" class="{{file.isDirectory ? 'directory' : 'file' }} file-item">
+      <fa-icon [icon]="file.isDirectory ? faFolder : faFile" class="file-icon"></fa-icon>
+      <div class="file-info">
+        <div class="file-name">{{ file.name }}</div>
+        <div class="file-size">{{ file.size }}</div>
+
+      </div>
     </div>
   </div>
 
